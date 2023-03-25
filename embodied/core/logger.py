@@ -259,7 +259,7 @@ def _encode_gif(frames, fps):
             f"-r {fps:.02f} -f gif -",
         ]
     )
-    proc = Popen(cmd.split(" "), stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    proc = Popen(cmd.split(" "), stdin=PIPE, stdout=PIPE, stderr=PIPE, bufsize=4096)
     for image in frames:
         proc.stdin.write(image.tobytes())
     out, err = proc.communicate()
