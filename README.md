@@ -67,3 +67,8 @@ Using the Tasks
 
 The HRL environments are in `embodied/envs/pinpad.py` and
 `embodied/envs/loconav.py`.
+
+For video summary using FFmpeg,
+```sh
+export LD_LIBRARY_PATH=/content/conda-env/lib:/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+```
