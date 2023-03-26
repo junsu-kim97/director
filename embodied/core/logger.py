@@ -175,16 +175,16 @@ class TensorBoardOutput(AsyncOutput):
         name = name if isinstance(name, str) else name.decode("utf-8")
         if np.issubdtype(video.dtype, np.floating):
             video = np.clip(255 * video, 0, 255).astype(np.uint8)
-        # try:
-        #     T, H, W, C = video.shape
-        #     summary = tf1.Summary()
-        #     image = tf1.Summary.Image(height=H, width=W, colorspace=C)
-        #     image.encoded_image_string = _encode_gif(video, self._fps)
-        #     summary.value.add(tag=name, image=image)
-        #     tf.summary.experimental.write_raw_pb(summary.SerializeToString(), step)
-        # except (IOError, OSError) as e:
-        #     print("GIF summaries require ffmpeg in $PATH.", e)
-        tf.summary.image(name, video, step)
+        try:
+            T, H, W, C = video.shape
+            summary = tf1.Summary()
+            image = tf1.Summary.Image(height=H, width=W, colorspace=C)
+            image.encoded_image_string = _encode_gif(video, self._fps)
+            summary.value.add(tag=name, image=image)
+            tf.summary.experimental.write_raw_pb(summary.SerializeToString(), step)
+        except (IOError, OSError) as e:
+            print("GIF summaries require ffmpeg in $PATH.", e)
+            tf.summary.image(name, video, step)
 
 
 class MlflowOutput:
