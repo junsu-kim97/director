@@ -11,4 +11,4 @@ CUDA_VISIBLE_DEVICES=${GPU} python embodied/agents/director/train.py \
   --task ${TASK} \
   --seed ${SEED} \
   --env.seed ${SEED} \
-  --imag_horizon 16
+  --imag_horizon ${HORIZON}
